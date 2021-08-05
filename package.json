@@ -17,6 +17,7 @@
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
     "@babel/preset-typescript": "^7.12.7",
+    "@bigtest/interactor": "^0.30.0",
     "@storybook/addon-essentials": "6.4.0-alpha.24",
     "@storybook/addon-storyshots": "6.4.0-alpha.24",
     "@storybook/addon-storysource": "6.4.0-alpha.24",

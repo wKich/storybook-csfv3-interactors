@@ -1,48 +1,39 @@
-import { keyframes, styled } from '@storybook/theming';
-import {
-  ErrorMessage,
-  Field as FormikInput,
-  Form as FormikForm,
-  Formik,
-  FormikProps,
-} from 'formik';
-import React, { FC, HTMLAttributes, useCallback, useState } from 'react';
-import { Icons, WithTooltip } from '@storybook/components';
+import { keyframes, styled } from "@storybook/theming";
+import { ErrorMessage, Field as FormikInput, Form as FormikForm, Formik, FormikProps } from "formik";
+import React, { FC, HTMLAttributes, useCallback, useState } from "react";
+import { Icons, WithTooltip } from "@storybook/components";
 
 const errorMap = {
   email: {
     required: {
-      normal: 'Please enter your email address',
+      normal: "Please enter your email address",
       tooltip:
-        'We do require an email address and a password as a minimum in order to be able to create an account for you to log in with',
+        "We do require an email address and a password as a minimum in order to be able to create an account for you to log in with",
     },
     format: {
-      normal: 'Please enter a correctly formatted email address',
-      tooltip:
-        'Your email address is formatted incorrectly and is not correct - please double check for misspelling',
+      normal: "Please enter a correctly formatted email address",
+      tooltip: "Your email address is formatted incorrectly and is not correct - please double check for misspelling",
     },
   },
   password: {
     required: {
-      normal: 'Please enter a password',
-      tooltip: 'A password is requried to create an account',
+      normal: "Please enter a password",
+      tooltip: "A password is requried to create an account",
     },
     length: {
-      normal: 'Please enter a password of minimum 6 characters',
+      normal: "Please enter a password of minimum 6 characters",
       tooltip:
-        'For security reasons we enforce a password length of minimum 6 characters - but have no other requirements',
+        "For security reasons we enforce a password length of minimum 6 characters - but have no other requirements",
     },
   },
   verifiedPassword: {
     required: {
-      normal: 'Please verify your password',
-      tooltip:
-        'Verification of your password is required to ensure no errors in the spelling of the password',
+      normal: "Please verify your password",
+      tooltip: "Verification of your password is required to ensure no errors in the spelling of the password",
     },
     match: {
-      normal: 'Your passwords do not match',
-      tooltip:
-        'Your verification password has to match your password to make sure you have not misspelled',
+      normal: "Your passwords do not match",
+      tooltip: "Your verification password has to match your password to make sure you have not misspelled",
     },
   },
 };
@@ -120,7 +111,7 @@ export const AccountForm: FC<AccountFormProps> = ({
       }
 
       setSubmitting(false);
-      resetForm({ values: { email: '', password: '', verifiedPassword: '' } });
+      resetForm({ values: { email: "", password: "", verifiedPassword: "" } });
 
       setState({
         ...state,
@@ -135,12 +126,7 @@ export const AccountForm: FC<AccountFormProps> = ({
   return (
     <Wrapper>
       <Brand>
-        <Logo
-          aria-label="Storybook Logo"
-          viewBox="0 0 64 64"
-          transacting={state.transacting}
-          role="img"
-        >
+        <Logo aria-label="Storybook Logo" viewBox="0 0 64 64" transacting={state.transacting} role="img">
           <title>Storybook icon</title>
           <g id="Artboard" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <path
@@ -178,9 +164,7 @@ export const AccountForm: FC<AccountFormProps> = ({
       <Content>
         {state.transactionSuccess && !state.transactionFailure && (
           <Presentation>
-            <p>
-              Everything is perfect. Your account is ready and we should probably get you started!
-            </p>
+            <p>Everything is perfect. Your account is ready and we should probably get you started!</p>
             <p>So why don't you get started then?</p>
             <Submit
               dirty
@@ -200,8 +184,8 @@ export const AccountForm: FC<AccountFormProps> = ({
           <Presentation>
             <p>What a mess, this API is not working</p>
             <p>
-              Someone should probably have a stern talking to about this, but it won't be me - coz
-              I'm gonna head out into the nice weather
+              Someone should probably have a stern talking to about this, but it won't be me - coz I'm gonna head out
+              into the nice weather
             </p>
             <Submit
               dirty
@@ -219,7 +203,7 @@ export const AccountForm: FC<AccountFormProps> = ({
         )}
         {!state.transactionSuccess && !state.transactionFailure && (
           <Formik
-            initialValues={{ email: '', password: '', verifiedPassword: '' }}
+            initialValues={{ email: "", password: "", verifiedPassword: "" }}
             validateOnBlur={false}
             validateOnChange={false}
             onSubmit={handleFormSubmit}
@@ -261,25 +245,24 @@ export const AccountForm: FC<AccountFormProps> = ({
               const errors = _errors as FormErrors;
 
               return (
-                <Form noValidate aria-disabled={isSubmitting ? 'true' : 'false'}>
+                <Form noValidate aria-disabled={isSubmitting ? "true" : "false"}>
                   <FieldWrapper>
                     <Label htmlFor="email">Email</Label>
-                    <FormikInput id="email" name="email">
+                    <FormikInput name="email">
                       {({ field }: { field: HTMLAttributes<HTMLInputElement> }) => (
                         <>
                           <Input
+                            id="email"
                             data-testid="email"
                             aria-required="true"
-                            aria-disabled={isSubmitting ? 'true' : 'false'}
+                            aria-disabled={isSubmitting ? "true" : "false"}
                             disabled={isSubmitting}
                             type="email"
-                            aria-invalid={errors.email ? 'true' : 'false'}
+                            aria-invalid={errors.email ? "true" : "false"}
                             {...field}
                           />
                           {errors.email && (
-                            <WithTooltip
-                              tooltip={<ErrorTooltip>{errors.emailTooltip}</ErrorTooltip>}
-                            >
+                            <WithTooltip tooltip={<ErrorTooltip>{errors.emailTooltip}</ErrorTooltip>}>
                               <ErrorWrapper>
                                 <ErrorIcon icon="question" height={14} />
                                 <Error name="email" component="div" />
@@ -292,13 +275,14 @@ export const AccountForm: FC<AccountFormProps> = ({
                   </FieldWrapper>
                   <FieldWrapper>
                     <Label htmlFor="password">Password</Label>
-                    <FormikInput id="password" name="password">
+                    <FormikInput name="password">
                       {({ field }: { field: HTMLAttributes<HTMLInputElement> }) => (
                         <Input
+                          id="password"
                           data-testid="password1"
                           aria-required="true"
-                          aria-disabled={isSubmitting ? 'true' : 'false'}
-                          aria-invalid={errors.password ? 'true' : 'false'}
+                          aria-disabled={isSubmitting ? "true" : "false"}
+                          aria-invalid={errors.password ? "true" : "false"}
                           type="password"
                           disabled={isSubmitting}
                           {...field}
@@ -317,13 +301,14 @@ export const AccountForm: FC<AccountFormProps> = ({
                   {passwordVerification && (
                     <FieldWrapper>
                       <Label htmlFor="verifiedPassword">Verify Password</Label>
-                      <FormikInput id="verifiedPassword" name="verifiedPassword">
+                      <FormikInput name="verifiedPassword">
                         {({ field }: { field: HTMLAttributes<HTMLInputElement> }) => (
                           <Input
+                            id="verifiedPassword"
                             data-testid="password2"
                             aria-required="true"
-                            aria-disabled={isSubmitting ? 'true' : 'false'}
-                            aria-invalid={errors.verifiedPassword ? 'true' : 'false'}
+                            aria-disabled={isSubmitting ? "true" : "false"}
+                            aria-invalid={errors.verifiedPassword ? "true" : "false"}
                             type="password"
                             disabled={isSubmitting}
                             {...field}
@@ -331,9 +316,7 @@ export const AccountForm: FC<AccountFormProps> = ({
                         )}
                       </FormikInput>
                       {errors.verifiedPassword && (
-                        <WithTooltip
-                          tooltip={<ErrorTooltip>{errors.verifiedPasswordTooltip}</ErrorTooltip>}
-                        >
+                        <WithTooltip tooltip={<ErrorTooltip>{errors.verifiedPasswordTooltip}</ErrorTooltip>}>
                           <ErrorWrapper>
                             <ErrorIcon icon="question" height={14} />
                             <Error name="verifiedPassword" component="div" />
@@ -345,18 +328,14 @@ export const AccountForm: FC<AccountFormProps> = ({
                   <Actions>
                     <Submit
                       data-testid="submit"
-                      aria-disabled={isSubmitting || !dirty ? 'true' : 'false'}
+                      aria-disabled={isSubmitting || !dirty ? "true" : "false"}
                       disabled={isSubmitting || !dirty}
                       dirty={dirty}
                       type="submit"
                     >
                       Create Account
                     </Submit>
-                    <Reset
-                      aria-disabled={isSubmitting ? 'true' : 'false'}
-                      disabled={isSubmitting}
-                      type="reset"
-                    >
+                    <Reset aria-disabled={isSubmitting ? "true" : "false"} disabled={isSubmitting} type="reset">
                       Reset
                     </Reset>
                   </Actions>
@@ -372,9 +351,9 @@ export const AccountForm: FC<AccountFormProps> = ({
 
 const Wrapper = styled.section(({ theme }) => ({
   fontFamily: theme.typography.fonts.base,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   width: 450,
   padding: 32,
   backgroundColor: theme.background.content,
@@ -382,26 +361,26 @@ const Wrapper = styled.section(({ theme }) => ({
 }));
 
 const Brand = styled.div({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 });
 
 const Title = styled.svg({
   height: 40,
   zIndex: 1,
   left: -32,
-  position: 'relative',
+  position: "relative",
 });
 
 const logoAnimation = keyframes({
-  '0': {
-    transform: 'rotateY(0deg)',
-    transformOrigin: '50% 5% 0',
+  "0": {
+    transform: "rotateY(0deg)",
+    transformOrigin: "50% 5% 0",
   },
-  '100%': {
-    transform: 'rotateY(360deg)',
-    transformOrigin: '50% 5% 0',
+  "100%": {
+    transform: "rotateY(360deg)",
+    transformOrigin: "50% 5% 0",
   },
 });
 
@@ -419,34 +398,34 @@ const Logo = styled.svg<LogoProps>(
 
 const Introduction = styled.p({
   marginTop: 20,
-  textAlign: 'center',
+  textAlign: "center",
 });
 
 const Content = styled.div({
-  display: 'flex',
-  alignItems: 'flex-start',
-  justifyContent: 'center',
+  display: "flex",
+  alignItems: "flex-start",
+  justifyContent: "center",
   width: 350,
   minHeight: 189,
   marginTop: 8,
 });
 
 const Presentation = styled.div({
-  textAlign: 'center',
+  textAlign: "center",
 });
 
 const Form = styled(FormikForm)({
-  width: '100%',
-  alignSelf: 'flex-start',
+  width: "100%",
+  alignSelf: "flex-start",
   '&[aria-disabled="true"]': {
     opacity: 0.6,
   },
 });
 
 const FieldWrapper = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'stretch',
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "stretch",
   marginBottom: 10,
 });
 
@@ -459,29 +438,29 @@ const Label = styled.label({
 const Input = styled.input(({ theme }) => ({
   fontSize: 14,
   color: theme.color.defaultText,
-  padding: '10px 15px',
+  padding: "10px 15px",
   borderRadius: 4,
-  appearance: 'none',
-  outline: 'none',
-  border: '0 none',
-  boxShadow: 'rgb(0 0 0 / 10%) 0px 0px 0px 1px inset',
-  '&:focus': {
-    boxShadow: 'rgb(30 167 253) 0px 0px 0px 1px inset',
+  appearance: "none",
+  outline: "none",
+  border: "0 none",
+  boxShadow: "rgb(0 0 0 / 10%) 0px 0px 0px 1px inset",
+  "&:focus": {
+    boxShadow: "rgb(30 167 253) 0px 0px 0px 1px inset",
   },
-  '&:active': {
-    boxShadow: 'rgb(30 167 253) 0px 0px 0px 1px inset',
+  "&:active": {
+    boxShadow: "rgb(30 167 253) 0px 0px 0px 1px inset",
   },
   '&[aria-invalid="true"]': {
-    boxShadow: 'rgb(255 68 0) 0px 0px 0px 1px inset',
+    boxShadow: "rgb(255 68 0) 0px 0px 0px 1px inset",
   },
 }));
 
 const ErrorWrapper = styled.div({
-  display: 'flex',
-  alignItems: 'flex-start',
+  display: "flex",
+  alignItems: "flex-start",
   fontSize: 11,
   marginTop: 6,
-  cursor: 'help',
+  cursor: "help",
 });
 
 const ErrorIcon = styled(Icons)(({ theme }) => ({
@@ -500,9 +479,9 @@ const ErrorTooltip = styled.div(({ theme }) => ({
 }));
 
 const Actions = styled.div({
-  alignSelf: 'stretch',
-  display: 'flex',
-  justifyContent: 'space-between',
+  alignSelf: "stretch",
+  display: "flex",
+  justifyContent: "space-between",
   marginTop: 24,
 });
 
@@ -513,27 +492,27 @@ interface ButtonProps {
 }
 
 const Button = styled.button<ButtonProps>({
-  backgroundColor: 'transparent',
-  border: '0 none',
-  outline: 'none',
-  appearance: 'none',
+  backgroundColor: "transparent",
+  border: "0 none",
+  outline: "none",
+  appearance: "none",
   fontWeight: 500,
   fontSize: 12,
-  flexBasis: '50%',
-  cursor: 'pointer',
-  padding: '11px 16px',
+  flexBasis: "50%",
+  cursor: "pointer",
+  padding: "11px 16px",
   borderRadius: 4,
-  textTransform: 'uppercase',
-  '&:focus': {
-    textDecoration: 'underline',
+  textTransform: "uppercase",
+  "&:focus": {
+    textDecoration: "underline",
     fontWeight: 700,
   },
-  '&:active': {
-    textDecoration: 'underline',
+  "&:active": {
+    textDecoration: "underline",
     fontWeight: 700,
   },
   '&[aria-disabled="true"]': {
-    cursor: 'default',
+    cursor: "default",
   },
 });
 
@@ -542,11 +521,11 @@ const Submit = styled(Button)(({ theme, dirty }) => ({
   backgroundColor: theme.color.secondary,
   color: theme.color.inverseText,
   opacity: dirty ? 1 : 0.6,
-  boxShadow: 'rgb(30 167 253 / 10%) 0 0 0 1px inset',
+  boxShadow: "rgb(30 167 253 / 10%) 0 0 0 1px inset",
 }));
 
 const Reset = styled(Button)(({ theme }) => ({
   marginLeft: 8,
-  boxShadow: 'rgb(30 167 253) 0 0 0 1px inset',
+  boxShadow: "rgb(30 167 253) 0 0 0 1px inset",
   color: theme.color.secondary,
 }));
